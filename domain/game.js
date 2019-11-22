@@ -1,5 +1,4 @@
 function Game(playerA, playerB) {
-    Display.Game = this;
     var g = this;
     var playerTime = null;
 

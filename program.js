@@ -24,5 +24,3 @@ var playerA = new Player('HERO_01','CS2_102', deckA);
 var playerB = new Player('HERO_02','CS2_102', deckB);
 
 var game = new Game(playerA, playerB);
-
-game.start();

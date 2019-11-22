@@ -41,6 +41,10 @@ function Player(hero, heroPower, deck){
         this.lockedManaNextTurn = 0;
 
         this.pickCard();
+
+        for(var card of this.hand){
+            card.canPlay = card.displayCost <= this.currentMana;
+        }
     }
 
     pickCard = function(){

@@ -1,5 +1,6 @@
 function Game(playerA, playerB) {
-    
+    Display.Game = this;
+    var g = this;
     var playerTime = null;
 
     //Construtor
@@ -28,15 +29,26 @@ function Game(playerA, playerB) {
 
     turn = function(){
 
-        var player = playerTime === 'A' ? this.playerA : playerB;
+        var player = currentPlayer();
         player.startTurn();
 
         playerTime =  playerTime === 'A' ? 'B' : 'A';
         return new GameResult(player);
     }
 
+    playCard = function(cardId, target){
+
+    }
+
+    currentPlayer = function(){
+        return playerTime === 'A' ? this.playerA : playerB;
+    }
+    
+
     this.start = start;
     this.turn = turn;
+    this.playCard = playCard;
+    this.currentPlayer = currentPlayer;
     this.started = false;
 
     //privados
@@ -45,6 +57,9 @@ function Game(playerA, playerB) {
         this.availableActions = ['turn'];
         var cardsToPlayTemp = Query.cardsToPlay(player.hand, player.totalMana);
         this.cardsToPlay = [];
+
+        var currentPlayer = g.currentPlayer();
+        this.mana = currentPlayer.currentMana;
 
         for(var c of cardsToPlayTemp){
             this.cardsToPlay.push(c.display());

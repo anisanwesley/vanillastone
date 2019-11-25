@@ -1,4 +1,7 @@
 function Card(card){
+    // Reverse navigation
+    this.player = null;
+
     //Card values
     this.cardId = card.cardId;
     this.name = card.name;
@@ -26,21 +29,17 @@ function Card(card){
     this.maxHealth = card.health;
     
     //Aura
-    this.auraCost = card.cost;
-    this.auraAttack = card.attack;
-    this.auraHealth = card.health;
+    this.auraCost = 0
+    this.auraAttack = 0
+    this.auraHealth = 0
 
     //Effects
     this.isInjuried = false;
 
     // Methods
-    display = function(){
-        return `${this.cardId} (${this.cost}) ${this.attack|| ''}/${this.health|| ''} ${this.name} ${this.text || ''}`;
-    }
 
-    this.display = display;
 }
 Card.MatchId = 0;
-Card.Instantiate = function(cardId){
+Card.Create = function(cardId){
     return new Card(cards[cardId])
 }

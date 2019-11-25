@@ -1,18 +1,23 @@
-/*TODO:
-* Validar se cards são da classe
-*/
+
 
 function Player(hero, heroPower, deck){
+    // Reverse navigation
+    Log.todo('validar se card é da classe');
+    
     this.side = null;
+    this.game = null;
+    var p = this;
 
-    this.heroPower = Card.Instantiate(heroPower),
-    this.hero = Card.Instantiate(hero);
+    this.heroPower = Card.Create(heroPower),
+    this.hero = Card.Create(hero);
     var buildingDeck = this.deck = [];
     deck.sort(function() {
         return .5 - Math.random();
       })
       .forEach(function(c){
-        buildingDeck.push(Card.Instantiate(c));
+        var card = Card.Create(c);
+        card.player = p;
+        buildingDeck.push(card);
     });
     this.hand = [
         buildingDeck.pop(),
@@ -30,9 +35,16 @@ function Player(hero, heroPower, deck){
     this.lockedMana = 0;
     this.lockedManaNextTurn = 0;
 
+    spendMana = function(mana){
+        Log.trace('spendMana', arguments);
+        if(mana > this.currentMana){
+            Log.error('Não foi possível descontar mana');
+        }
+        this.currentMana -= mana;
+    }
 
     startTurn = function() {
-        console.log('Event:: Start turn');
+        Log.trace('startTurn');
         if(this.totalMana < 10){
             this.totalMana++;
         }
@@ -48,10 +60,10 @@ function Player(hero, heroPower, deck){
     }
 
     pickCard = function(){
-        console.log('Event:: Pick card');
+        Log.trace('pickCard');
 
         if(this.deck.length === 0){
-            console.log('Event:: Fadigue');
+            Log.todo('fadigue');
         } else {
             this.hand.push(this.deck.pop());
         }
@@ -59,4 +71,5 @@ function Player(hero, heroPower, deck){
 
     this.startTurn = startTurn;
     this.pickCard = pickCard;
+    this.spendMana = spendMana;
 }

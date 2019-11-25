@@ -1,4 +1,4 @@
 function Battlefield(){
-    this.sideA = [];
-    this.sideB = [];
+    this.A = [];
+    this.B = [];
 }

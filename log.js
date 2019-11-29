@@ -1,38 +1,37 @@
 Log = {
-    settings: {
-        todo :false,
-        event : true,
-        trace : false,
-        create : false,
-        error : true,
-    },
     todo: function(text){
-        if(Log.settings.todo){
+        if(App.log.todo){
             console.log('TODO:: '+ text)
         }
     },
     event: function(text){
-        if(Log.settings.event){
+        if(App.log.event){
             console.log('EVENT:: '+ text)
         }
     },
     trace: function(text, args){
-        if(Log.settings.trace){
+        if(App.log.trace){
             if(args){
-                console.log('TRACE:: '+ text + 'args:' + args.toString())
+                console.log('TRACE:: '+ text + '. args:', args)
             } else {
                 console.log('TRACE:: '+ text)
             }
         }
     },
     create: function(text){
-        if(Log.settings.create){
+        if(App.log.create){
             console.log('CREATE:: '+ text)
         }
     },
-    error: function(text){
-        if(Log.settings.error){
-            console.log('ERROR:: '+ text)
+    error: function(text, object){
+        if(App.log.error){
+            console.error('ERROR:: '+ text, object)
+        }
+    },
+    table: function(array, properties, description){
+        if(App.log.table){
+            console.log(description)
+            console.table(array, properties)
         }
     },
 }

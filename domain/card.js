@@ -12,6 +12,7 @@ function Card(card){
     this.text = card.text;
     this.collectible = card.collectible;
     this.playerClass = card.playerClass;
+    this.collectible = card.collectible;
 
     this.cost = card.cost;
     this.attack = card.attack;
@@ -33,10 +34,9 @@ function Card(card){
     this.auraAttack = 0
     this.auraHealth = 0
 
-    //Effects
+    //Gameplay Effects
+    this.canAttack = false;
     this.isInjuried = false;
-
-    // Methods
 
 }
 Card.MatchId = 0;

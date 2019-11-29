@@ -64,8 +64,10 @@ function Player(hero, heroPower, deck){
 
         if(this.deck.length === 0){
             Log.todo('fadigue');
+        } else if(this.hand.length === 10){
+            Log.todo('mão cheia');
         } else {
-            this.hand.push(this.deck.pop());
+        this.hand.push(this.deck.pop());
         }
     }
 

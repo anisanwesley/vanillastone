@@ -13,5 +13,12 @@ Query = {
         return queryable[queryable.map(function(e){
             return e[prop];
         }).indexOf(value)];
+    },
+    first:function(queryable, prop, value){
+        for(var item of queryable){
+            if (item[prop] === value){
+                return item;
+            }
+        }
     }
 }

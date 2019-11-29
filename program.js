@@ -45,3 +45,6 @@ console.log('min matchId ~> '+ Card.MatchId)
 
 console.log(game.start());
 
+game.playCard(Query.first(game.playerA.hand, 'displayCost', 1).matchId);
+game.turn();
+

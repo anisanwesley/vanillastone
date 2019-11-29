@@ -1,2 +1,3 @@
 # vanillastone
-Hearthstone with pure javascript to play wish console prompt
+Hearthstone with pure javascript to play wist console prompt
+Even unit tests are pure js.

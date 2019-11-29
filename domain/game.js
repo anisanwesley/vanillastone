@@ -1,5 +1,6 @@
 function Game(playerA, playerB) {
     Log.create("Game")
+    var root = this;
     var playerTime = null;
 
     //Construtor
@@ -29,19 +30,19 @@ function Game(playerA, playerB) {
     }
 
     turn = function(){
+        console.clear();
         Log.trace('turn');
-        var player = currentPlayer();
-        player.startTurn();
-
         if(this.started){
             playerTime =  playerTime === 'A' ? 'B' : 'A';
         }
+        var player = currentPlayer();
+        player.startTurn();
+
         this.started = true;
         return new GameResult(player);
     }
 
     playCard = function(cardId, target){
-        debugger;
         Log.trace('playCard', arguments);
         var player = currentPlayer();
         var card = Query.find(player.hand, 'matchId', cardId);
@@ -52,9 +53,10 @@ function Game(playerA, playerB) {
         player.spendMana(card.displayCost);
 
         Log.event('play card');
-        switch(card.type){
+        switch(card.type.toLowerCase()){
             case 'minion':
-
+                swap(player.hand, this.battlefield[playerTime], card);
+                Log.event('summon');
             break;
             case 'spell':
 
@@ -63,8 +65,14 @@ function Game(playerA, playerB) {
         return new GameResult(player);
     }
 
+    swap = function(from, to, item) {
+        Log.trace('swap', arguments);
+        Log.todo('validar se item existe')
+        to.push(from.splice(item,1)[0]);
+    }
+
     currentPlayer = function(){
-        return playerTime === 'A' ? this.playerA : playerB;
+        return playerTime === 'A' ? this.playerA : this.playerB;
     }
 
     this.start = start;
@@ -75,15 +83,25 @@ function Game(playerA, playerB) {
 
     //privados
     function GameResult(player){
-        this.playerTime = playerTime;
         var availableActions = ['turn'];
+        this.playerTime = playerTime;
         this.player = player;
         this.mana = player.currentMana;
         var cardsToPlay = Query.cardsToPlay(player.hand, player.totalMana);
         
-        if(cardsToPlay.length > 0) availableActions.push('playCard');
+        for (var card of cardsToPlay) {
+            if(card.displayCost <= player.currentMana){
+                availableActions.push('playCard');
+            }
+            break;
+        }
         
         this.availableActions = availableActions.toString();
+        var properties = ['matchId','name', 'displayCost', 'displayAttack', 'displayHealth'];
+        
+        Log.table(root.battlefield[playerTime === 'A' ? 'B': 'A'], properties, "Lacaios do seu oponente:");
+        Log.table(root.battlefield[playerTime], properties, "Seus lacaios:");
+        Log.table(player.hand, properties, "Sua mão:");
     }
 }
 

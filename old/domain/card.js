@@ -21,7 +21,7 @@ function Card(card){
     //Immutable
     this.owner = null;
     this.matchId = ++Card.MatchId;
-    
+     
     //Mutable
     this.displayCost = card.cost;
     this.displayAttack = card.attack;

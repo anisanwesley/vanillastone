@@ -7,4 +7,4 @@ App = {
       error : true,
       table : true,
     },
-}  
+}   

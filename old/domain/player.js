@@ -13,7 +13,7 @@ function Player(hero, heroPower, deck){
     var buildingDeck = this.deck = [];
     deck.sort(function() {
         return .5 - Math.random();
-      })
+      }) 
       .forEach(function(c){
         var card = Card.Create(c);
         card.player = p;

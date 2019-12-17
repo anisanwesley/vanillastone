@@ -17,7 +17,7 @@ function Game(playerA, playerB) {
 
     start = function() {
         Log.trace('start');
-        if(this.started) return;
+        if(this.started) return; 
 
         playerTime = 'A';
         

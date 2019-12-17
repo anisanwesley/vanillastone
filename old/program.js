@@ -15,7 +15,7 @@ var deckA = [
     'CS2_tk1',
     'CS2_101t',
     'CS2_050',
-];
+]; 
 
 var deckB = [
     'CS2_120',

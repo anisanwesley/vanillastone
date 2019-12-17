@@ -17,7 +17,7 @@ Log = {
                 console.log('TRACE:: '+ text)
             }
         }
-    },
+    }, 
     create: function(text){
         if(App.log.create){
             console.log('CREATE:: '+ text)
